@@ -1,0 +1,7 @@
+[Unit]
+Description=Pacman - synchronize package database
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/pacman -Sy
+

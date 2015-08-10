@@ -1,0 +1,10 @@
+[Unit]
+Description=Run pacman synchronize in every hour
+
+[Timer]
+OnBootSec=2m
+OnUnitInactiveSec=1h
+Unit=pacman-synchronize.service
+
+[Install]
+WantedBy=multi-user.target

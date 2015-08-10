@@ -1,0 +1,27 @@
+#!/bin/sh
+
+PATH=${PATH}:${HOME}/.cabal/bin:${HOME}/bin
+
+#VBoxClient-all &
+#modprobe vmhgfs >/dev/null 2>&1 && vmware-user-suid-wrapper
+
+xset +fp /usr/share/fonts/local
+xset fp rehash
+
+#mpd ~/.mpd/mpd.conf #not moved yet
+
+xset +fp ~/.fonts/powerline-fonts/Terminus/BDF/
+xset fp rehash
+
+if [ "$1" = "xmonad" ]; then
+    VBoxClient-all &
+    setxkbmap -layout en_US,hu -option grp:caps_toggle
+    xset b off &
+    xrdb -merge ~/.Xdefaults
+    compton -cCfb -D 4 -r 5 -l -5 -t -2 -o 0.2 -e 0.6 &
+    #stalonetray -i 16 --icon-gravity E --geometry 5x1-0+0 -bg '#000000' --sticky --skip-taskbar &
+    #empathy &
+    #xloadimage -onroot -fullscreen -center background/stars-wallpaper-1920x1080.jpg
+    variety &
+    nice -n 10 gnome-terminal -e tmux_session.sh &
+fi
