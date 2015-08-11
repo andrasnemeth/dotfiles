@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+packages=(xmonad xmonad-contrib gnome-terminal libnotify acpi alsa-utils)
+
+sudo pacman -Ss ${packages[@]}
