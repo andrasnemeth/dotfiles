@@ -156,7 +156,8 @@ colors = M.fromList
 -- }}}
 
 myFontName :: String
-myFontName = "-*-Terminus-regular-r-normal-*-12-*-*-*-*-*-*-*"
+--myFontName = "-*-terminesspowerline-*-r-normal-*-12-*-*-*-*-*-*-*"
+myFontName = "Terminesspowerline-8"
 
 -- {{{ Main
 main :: IO ()
@@ -191,7 +192,7 @@ main = do
                       ++ dzenFont
                       ++ "' -bg '#000000' -h 18 -e 'onnewinput=;button3='"
           conkydesktop = "conky -c ~/.conkydesktop"
-          dzenFont  = "Terminus-8"--"Inconsolata-8"
+          dzenFont  = "Terminesspowerline-8"--"Inconsolata-8"
           -- | Layouts --¬
           myLayout = --mkToggle (NOBORDERS ?? FULL ?? EOT) $
               boringWindows $
@@ -384,7 +385,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     [ ((modMask,                 xK_t     ), spawn $ XMonad.terminal conf)
     , ((modMask .|. shiftMask,   xK_t     ), spawn "urxvt -title urxvt-float")
     , ((modMask .|. controlMask, xK_t     ), spawn "tmux_session.sh")
-    , ((modMask,                 xK_r     ), spawn "dmenu_run -fn \"-*-Terminus-regular-r-normal-*-12-*-*-*-*-*-*-*\" -nb \"#131313\" -nf \"#888888\" -sb \"#2A2A2A\" -sf \"#3579A8\"")
+    , ((modMask,                 xK_r     ), spawn "dmenu_run -fn \"-*-terminuesspowerline-*-r-normal-*-8-*-*-*-*-*-*-*\" -nb \"#131313\" -nf \"#888888\" -sb \"#2A2A2A\" -sf \"#3579A8\"")
     --, ((modMask,                 xK_b     ), spawn "chromium --incognito")
     , ((modMask,                 xK_b     ), spawn "firefox")
     , ((modMask,                 xK_e     ), spawn "empathy")

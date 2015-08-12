@@ -5,12 +5,17 @@ PATH=${PATH}:${HOME}/.cabal/bin:${HOME}/bin
 #VBoxClient-all &
 #modprobe vmhgfs >/dev/null 2>&1 && vmware-user-suid-wrapper
 
-xset +fp /usr/share/fonts/local
+#xset +fp /usr/share/fonts/local
+xset +fp ~/.local/share/fonts/powerline-fonts/Terminus/BDF/
+xset +fp ~/.local/share/fonts/powerline-fonts/DroidSansMono
 xset fp rehash
 
 #mpd ~/.mpd/mpd.conf #not moved yet
 
-xset +fp ~/.fonts/powerline-fonts/Terminus/BDF/
+#xset +fp ~/.fonts/powerline-fonts/Terminus/BDF/
+#xset fp rehash
+
+xset +fp ~/repositories/powerline-fonts/Terminus/BDF/
 xset fp rehash
 
 if [ "$1" = "xmonad" ]; then
