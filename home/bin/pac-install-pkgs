@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-packages=(xmonad xmonad-contrib gnome-terminal libnotify acpi alsa-utils emacs-nox)
+packages=(xmonad xmonad-contrib gnome-terminal libnotify acpi alsa-utils emacs-nox git gsfonts tcl tk irssi openssh sshpass python2-paramiko)
 
 sudo pacman -Ss ${packages[@]}

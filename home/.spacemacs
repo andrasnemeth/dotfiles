@@ -21,6 +21,7 @@
      ;; better-defaults
      emacs-lisp
      git
+     github
      markdown
      org
      ;; (shell :variables
@@ -28,6 +29,12 @@
      ;;        shell-default-position 'bottom)
      syntax-checking
      version-control
+     c-c++
+     haskell
+     python
+     erlang
+     latex
+     themes-megapack
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -50,7 +57,7 @@ before layers configuration."
   (setq-default
    ;; Either `vim' or `emacs'. Evil is always enabled but if the variable
    ;; is `emacs' then the `holy-mode' is enabled at startup.
-   dotspacemacs-editing-style 'vim
+   dotspacemacs-editing-style 'emacs
    ;; If non nil output loading progress in `*Messages*' buffer.
    dotspacemacs-verbose-loading nil
    ;; Specify the startup banner. Default value is `official', it displays
@@ -66,7 +73,9 @@ before layers configuration."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(tsdh-dark
+   dotspacemacs-themes '(molokai
+                         noctilux
+                         tsdh-dark
                          solarized-light
                          solarized-dark
                          spacemacs-light
@@ -162,7 +171,16 @@ before layers configuration."
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
+  (when (fboundp 'windmove-default-keybindings)
+    (windmove-default-keybindings))
+  (load-file (file-chase-links (expand-file-name "~/.emacs.d.user/fix-tmux-keys.el")))
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(flycheck-clang-language-standard "c++14"))

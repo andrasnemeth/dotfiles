@@ -1,5 +1,13 @@
-`mkdir ~/repositories && cd ~/repositories`
+`git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"`
+`setopt EXTENDED_GLOB                                                           \
+for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do           \
+ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"                                \
+done`
 `mkdir -p ~/.local/share/fonts`
 `git clone https://github.com/powerline/fonts.git  ~/.local/share/fonts/powerline-fonts`
 `fc-cache -fv`
 `git clone --recursive https://github.com/syl20bnr/spacemacs ~/.emacs.d`
+`git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf`
+`~/.fzf/install`
+pip install --user powerline-status
+pip show powerline-status | grep 'Location: ' | cut -d ' ' -f 2

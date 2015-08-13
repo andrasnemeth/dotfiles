@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PATH=${PATH}:${HOME}/.cabal/bin:${HOME}/bin
+#PATH=${PATH}:${HOME}/.cabal/bin:${HOME}/bin:${HOME}/.local/bin
 
 #VBoxClient-all &
 #modprobe vmhgfs >/dev/null 2>&1 && vmware-user-suid-wrapper
@@ -15,8 +15,8 @@ xset fp rehash
 #xset +fp ~/.fonts/powerline-fonts/Terminus/BDF/
 #xset fp rehash
 
-xset +fp ~/repositories/powerline-fonts/Terminus/BDF/
-xset fp rehash
+#xset +fp ~/repositories/powerline-fonts/Terminus/BDF/
+#xset fp rehash
 
 if [ "$1" = "xmonad" ]; then
     VBoxClient-all &
@@ -28,5 +28,5 @@ if [ "$1" = "xmonad" ]; then
     #empathy &
     #xloadimage -onroot -fullscreen -center background/stars-wallpaper-1920x1080.jpg
     variety &
-    nice -n 10 gnome-terminal -e tmux_session.sh &
+    nice -n 10 gnome-terminal -e ~/bin/tmux_session.sh &
 fi
