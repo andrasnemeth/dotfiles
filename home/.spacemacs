@@ -29,7 +29,9 @@
      ;;        shell-default-position 'bottom)
      syntax-checking
      version-control
-     c-c++
+     (c-c++:variables
+      c-c++-default-mode-for-headers 'c++-mode
+      c-c++-enable-clang-support t)
      haskell
      python
      erlang
@@ -166,14 +168,40 @@ before layers configuration."
   ;; User initialization goes here
   )
 
+(defun set-cpp-style-hook ()
+  (setq c-default-style "k&r"
+        c-basic-offset 4
+        tab-width 4
+        indent-tabs-mode t)
+  (c-set-offset 'topmost-intro 0)
+  (c-set-offset 'innamespace 0)
+  (c-set-offset 'member-init-intro '++)
+  (c-set-offset 'arglist-cont-nonempty 0)
+  (c-set-offset 'template-args-cont '++)
+  (setq show-trailing-whitespace t)
+  )
 
 (defun dotspacemacs/config ()
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
+  ;; Fix keys in terminal
   (when (fboundp 'windmove-default-keybindings)
     (windmove-default-keybindings))
   (load-file (file-chase-links (expand-file-name "~/.emacs.d.user/fix-tmux-keys.el")))
+
+  ;;Set c++ style
+  (add-hook 'c++-mode-hook 'set-cpp-style-hook)
+
+  ;; Bind clang-format-region to C-M-tab in all modes:
+  (global-set-key [C-M-tab] 'clang-format-region)
+  ;; Bind clang-format-buffer to tab on the c++-mode only:
+  (add-hook 'c++-mode-hook 'clang-format-bindings)
+  (defun clang-format-bindings ()
+    (define-key c++-mode-map [tab] 'clang-format-buffer))
+
+  ;; Delete trailing whitespace
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
