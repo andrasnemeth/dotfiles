@@ -385,7 +385,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     [ ((modMask,                 xK_t     ), spawn $ XMonad.terminal conf)
     , ((modMask .|. shiftMask,   xK_t     ), spawn "urxvt -title urxvt-float")
     , ((modMask .|. controlMask, xK_t     ), spawn "tmux_session.sh")
-    , ((modMask,                 xK_r     ), spawn "dmenu_run -fn \"-*-terminuesspowerline-*-r-normal-*-8-*-*-*-*-*-*-*\" -nb \"#131313\" -nf \"#888888\" -sb \"#2A2A2A\" -sf \"#3579A8\"")
+    , ((modMask,                 xK_r     ), spawn "dmenu_run -fn \"-*-terminesspowerline-*-r-normal-*-8-*-*-*-*-*-*-*\" -nb \"#131313\" -nf \"#888888\" -sb \"#2A2A2A\" -sf \"#3579A8\"")
     --, ((modMask,                 xK_b     ), spawn "chromium --incognito")
     , ((modMask,                 xK_b     ), spawn "firefox")
     , ((modMask,                 xK_e     ), spawn "empathy")
@@ -444,9 +444,9 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,                 xK_q     ), spawn "killall dzen2 && xmonad --recompile && xmonad --restart")
 
     -- Alsa Multimedia Control
-    , ((0, 0x1008ff11), spawn "/home/alex/.xmonad/scripts/volctl down"  )
-    , ((0, 0x1008ff13), spawn "/home/alex/.xmonad/scripts/volctl up"    )
-    , ((0, 0x1008ff12), spawn "/home/alex/.xmonad/scripts/volctl toggle")
+    , ((0, 0x1008ff11), spawn "/home/nrw/.xmonad/scripts/volctl down"  )
+    , ((0, 0x1008ff13), spawn "/home/nrw/.xmonad/scripts/volctl up"    )
+    , ((0, 0x1008ff12), spawn "/home/nrw/.xmonad/scripts/volctl toggle")
 
     -- Brightness Control
     , ((0, 0x1008ff03), spawn "xbacklight -dec 20")

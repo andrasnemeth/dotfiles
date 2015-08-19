@@ -172,13 +172,15 @@ before layers configuration."
   (setq c-default-style "k&r"
         c-basic-offset 4
         tab-width 4
-        indent-tabs-mode t)
+        indent-tabs-mode nil)
   (c-set-offset 'topmost-intro 0)
   (c-set-offset 'innamespace 0)
   (c-set-offset 'member-init-intro '++)
+  (c-set-offset 'arglist-intro '++)
   (c-set-offset 'arglist-cont-nonempty 0)
   (c-set-offset 'template-args-cont '++)
   (setq show-trailing-whitespace t)
+  (linum-mode t)
   )
 
 (defun dotspacemacs/config ()
@@ -188,7 +190,7 @@ layers configuration."
   ;; Fix keys in terminal
   (when (fboundp 'windmove-default-keybindings)
     (windmove-default-keybindings))
-  (load-file (file-chase-links (expand-file-name "~/.emacs.d.user/fix-tmux-keys.el")))
+  (load-file (file-chase-links (expand-file-name "~/.emacs.d/private/fix-tmux-keys.el")))
 
   ;;Set c++ style
   (add-hook 'c++-mode-hook 'set-cpp-style-hook)
@@ -211,4 +213,5 @@ layers configuration."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(flycheck-clang-language-standard "c++14"))
+ '(flycheck-clang-language-standard "c++14")
+ '(linum-format "%4d "))
