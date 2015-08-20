@@ -30,8 +30,7 @@
      syntax-checking
      version-control
      (c-c++:variables
-      c-c++-default-mode-for-headers 'c++-mode
-      c-c++-enable-clang-support t)
+      c-c++-default-mode-for-headers 'c++-mode)
      haskell
      python
      erlang

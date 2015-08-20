@@ -1,19 +1,17 @@
 # -*- mode: snippet -*-
 # name: haeder
 # key: hpp
+# expand-env: ((my-yas-filepath-fragments (split-string (replace-regexp-in-string "^.*?/inc[l]*[ude]*/" "" (file-name-directory (buffer-file-name))) "/")))
 # --
-`(defvar my-yas-filepath-fragments ((replace-regexp-in-string "^.*?/inc[l]*[ude]*/" "" (file-name-sans-extension (buffer-file-name)))))`
 #ifndef ${1:`(upcase (replace-regexp-in-string "/" "_" (replace-regexp-in-string "^.*?/inc[l]*[ude]*/" "" (file-name-sans-extension (buffer-file-name)))))`_HPP}
 #define $1
 
 //============================================================================//
-`(my-yas-filepath-fragments)`
-//----------------------------------------------------------------------------//
+`(reduce '(lambda (acc v) (if (string= v "") acc (concat (format "namespace %s {\n" v) acc))) (reverse my-yas-filepath-fragments) :initial-value "")`//----------------------------------------------------------------------------//
 
 
 
 //----------------------------------------------------------------------------//
-}
-//============================================================================//
+`(reduce '(lambda (acc v) (if (string= v "") acc (concat (format "} // namespace %s\n" v) acc))) my-yas-filepath-fragments :initial-value "")`//============================================================================//
 
 #endif // $1
