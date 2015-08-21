@@ -33,6 +33,7 @@ import XMonad.Hooks.DebugKeyEvents
 import XMonad.Hooks.DebugStack
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.Place
+import XMonad.Hooks.ManageHelpers
 --import XMonad.Hooks.FadeInactive
 -- Dialog and menu hooks
 import Graphics.X11.Xlib.Extras
@@ -198,7 +199,7 @@ main = do
               boringWindows $
               FS.fullscreenFull $
               avoidStruts $
-              --smartBorders $
+              smartBorders $
               --magicFocus $
               webLayout
               standardLayout
@@ -323,6 +324,7 @@ myManageHook = manageDocks <+> (composeAll . concat $
     -- , [ className       =? "OpenOffice.org 3.0" --> doF (W.shift "6:F") ]
     -- , [ className       =? "Pidgin"          --> doF (W.shift "3:C") ]
     , [ scratchpadManageHook (W.RationalRect 0.125 0.25 0.75 0.5) ]
+    , [ isFullscreen --> doFullFloat ]
     ])
     where
         myIgnores       = ["stalonetray", "Conky", "conky"]
