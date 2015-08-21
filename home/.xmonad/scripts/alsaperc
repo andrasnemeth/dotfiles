@@ -7,8 +7,8 @@
 #
 # ------------------------------------------------------------------
 
-AMASTER=`amixer get Master | awk 'END{gsub(/\[|\]|%/,""); print $5}'`
-ASTAT=`amixer get Master | awk 'END{gsub(/\[|\]|%/,""); print $7}'`
+AMASTER=`amixer get Master | awk 'END{gsub(/\[|\]|%/,""); print $4}'`
+ASTAT=`amixer get Master | awk 'END{gsub(/\[|\]|%/,""); print $6}'`
 ICON=""
 
 if [[ $ASTAT = "on" ]]; then
