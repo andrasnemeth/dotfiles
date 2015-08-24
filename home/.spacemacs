@@ -18,7 +18,7 @@
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      auto-completion
-     ;; better-defaults
+     ;better-defaults
      emacs-lisp
      git
      github
@@ -29,8 +29,8 @@
      ;;        shell-default-position 'bottom)
      syntax-checking
      version-control
-     (c-c++:variables
-      c-c++-default-mode-for-headers 'c++-mode)
+     ;(c-c++ :variables c-c++-enable-clang-support t)
+     ycmd
      haskell
      python
      erlang
@@ -165,6 +165,7 @@ before layers configuration."
    dotspacemacs-default-package-repository nil
    )
   ;; User initialization goes here
+  (setq ycmd-server-command '("python2" "~/workspace/ycmd/ycmd"))
   )
 
 (defun set-cpp-style-hook ()
@@ -203,6 +204,8 @@ layers configuration."
 
   ;; Delete trailing whitespace
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
+  (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/rtags")
+  (require 'rtags)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
