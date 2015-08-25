@@ -35,7 +35,7 @@
      python
      erlang
      latex
-     themes-megapack
+     ;themes-megapack
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -74,16 +74,17 @@ before layers configuration."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(molokai
-                         noctilux
-                         tsdh-dark
-                         solarized-light
-                         solarized-dark
-                         spacemacs-light
-                         spacemacs-dark
-                         leuven
-                         monokai
-                         zenburn)
+   dotspacemacs-themes '(molokai)
+   ;; dotspacemacs-themes '(molokai
+   ;;                       noctilux
+   ;;                       tsdh-dark
+   ;;                       solarized-light
+   ;;                       solarized-dark
+   ;;                       spacemacs-light
+   ;;                       spacemacs-dark
+   ;;                       leuven
+   ;;                       monokai
+   ;;                       zenburn)
    ;; If non nil the cursor color matches the state color.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
@@ -165,23 +166,43 @@ before layers configuration."
    dotspacemacs-default-package-repository nil
    )
   ;; User initialization goes here
-  (setq ycmd-server-command '("python2" "~/workspace/ycmd/ycmd"))
-  )
+  ;;
+  ;; Set ycmd server command
+  (let ((ycmd-lib (file-chase-links (expand-file-name "~/workspace/ycmd/ycmd"))))
+    (setq ycmd-server-command
+          (list "python2" ycmd-lib))
+    )
+  (set-variable 'ycmd-extra-conf-whitelist '("~/workspace/*" "~/repositories/*"))
+)
 
-(defun set-cpp-style-hook ()
+(defun set-cpp-style ()
   (setq c-default-style "k&r"
         c-basic-offset 4
         tab-width 4
-        indent-tabs-mode nil)
+        indent-tabs-mode nil
+        show-trailing-whitespace t)
   (c-set-offset 'topmost-intro 0)
   (c-set-offset 'innamespace 0)
   (c-set-offset 'member-init-intro '++)
   (c-set-offset 'arglist-intro '++)
-  (c-set-offset 'arglist-cont-nonempty 0)
+  (c-set-offset 'arglist-cont-nonempty '++)
   (c-set-offset 'template-args-cont '++)
-  (setq show-trailing-whitespace t)
-  (linum-mode t)
   )
+
+(defun my-c++-mode-hook ()
+  (ycmd-mode t)
+  (flycheck-mode t)
+  (company-mode t)
+  (set-cpp-style)
+  (linum-mode t)
+  ;; TODO: are thse required?
+  (require 'company-ycmd)
+  (company-ycmd-setup)
+  (delete 'company-clang company-backends)
+  (delete 'company-semantic company-backends)
+  (require 'flycheck-ycmd)
+  (flycheck-ycmd-setup)
+)
 
 (defun dotspacemacs/config ()
   "Configuration function.
@@ -191,9 +212,10 @@ layers configuration."
   (when (fboundp 'windmove-default-keybindings)
     (windmove-default-keybindings))
   (load-file (file-chase-links (expand-file-name "~/.emacs.d/private/fix-tmux-keys.el")))
+  (load-file (file-chase-links (expand-file-name "~/.emacs.d/private/fix-vertical-border.el")))
 
   ;;Set c++ style
-  (add-hook 'c++-mode-hook 'set-cpp-style-hook)
+  (add-hook 'c++-mode-hook 'my-c++-mode-hook)
 
   ;; Bind clang-format-region to C-M-tab in all modes:
   (global-set-key [C-M-tab] 'clang-format-region)
@@ -204,8 +226,25 @@ layers configuration."
 
   ;; Delete trailing whitespace
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+  ;; add rtags
   (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/rtags")
   (require 'rtags)
+
+  ;; fix ycmd
+  (setq company-clang-prefix-guesser 'company-clang-guess-prefix)
+
+  ;; fix linum format
+  (load-file (file-chase-links (expand-file-name "~/.emacs.d/private/fix-linum-mode.el")))
+
+  ;; move text
+  (require 'move-text)
+
+  ;; 80 character line width
+  ;; TODO
+  (setq whitespace-style '(trailing lines space-before-tab
+                                    indentation space-after-tab)
+        whitespace-line-column 80)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -215,5 +254,18 @@ layers configuration."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ahs-case-fold-search nil)
+ '(ahs-default-range (quote ahs-range-whole-buffer))
+ '(ahs-idle-interval 0.25)
+ '(ahs-idle-timer 0 t)
+ '(ahs-inhibit-face-list nil)
+ '(diff-hl-side 'right)
  '(flycheck-clang-language-standard "c++14")
- '(linum-format "%4d "))
+ '(ring-bell-function (quote ignore) t))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))

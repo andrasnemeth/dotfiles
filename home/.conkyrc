@@ -21,36 +21,36 @@ TEXT
 # -------------------------------------------------------------------------- 
 ^fg(\#393939)\
 : ^fg()\
-^i(/home/infinity/.xmonad/dzen/icons/xbm8x8/cpu.xbm) ${cpu}\
+^i(${HOME}/.xmonad/dzen/icons/xbm8x8/cpu.xbm) ${cpu}\
 ^fg(\#393939) \
 # -------------------------------------------------------------------------- 
 # Ram Usage
 # -------------------------------------------------------------------------- 
 ^fg(\#393939)\
 : ^fg()\
-^i(/home/infinity/.xmonad/dzen/icons/xbm8x8/mem.xbm) ${memperc} | \
+^i(${HOME}/.xmonad/dzen/icons/xbm8x8/mem.xbm) ${memperc} | \
 ${swapperc}^fg(\#393939) \
 # -------------------------------------------------------------------------- 
 # Pacman Updates
 # -------------------------------------------------------------------------- 
-^ca(1, /home/infinity/.xmonad/scripts/pacshow)\
+^ca(1, ${HOME}/.xmonad/scripts/pacshow)\
 ^fg(\#393939)\
 : ^fg()\
-${execi 50 /home/infinity/.xmonad/scripts/updcount}\
+${execi 50 ${HOME}/.xmonad/scripts/updcount}\
 ^fg(\#393939) \
 ^ca()\
 # -------------------------------------------------------------------------- 
 # Unread mails
 # -------------------------------------------------------------------------- 
-: ^fg(\#435d75)^fg()${execi 10 ~/.xmonad/scripts/mailcount}^fg(\#393939) \
+: ^fg(\#435d75)^fg()${execi 10 ${HOME}/.xmonad/scripts/mailcount}^fg(\#393939) \
 # -------------------------------------------------------------------------- 
 # Disk Usage
 # -------------------------------------------------------------------------- 
-: ^fg(\#435d75)^fg()${execi 120 ~/.xmonad/scripts/spaceperc}^fg(\#393939) \
+: ^fg(\#435d75)^fg()${execi 120 ${HOME}/.xmonad/scripts/spaceperc}^fg(\#393939) \
 # -------------------------------------------------------------------------- 
 #  Battery
 # -------------------------------------------------------------------------- 
-:^fg() ${execi 120 ~/.xmonad/scripts/batperc}^fg(\#393939) \
+:^fg() ${execi 120 ${HOME}/.xmonad/scripts/batperc}^fg(\#393939) \
 # -------------------------------------------------------------------------- 
 # -------------------------------------------------------------------------- 
 #  Volume
@@ -59,22 +59,22 @@ ${execi 50 /home/infinity/.xmonad/scripts/updcount}\
 ^ca(3, amixer -q set Master toggle)\
 ^ca(4, amixer -q set Master 5%+ unmute)\
 ^ca(5, amixer -q set Master 5%- unmute)\
-:^fg() ${exec  ~/.xmonad/scripts/alsaperc}^fg(\#393939) \
+:^fg() ${exec  ${HOME}/.xmonad/scripts/alsaperc}^fg(\#393939) \
 ^ca()^ca()^ca()\
 # -------------------------------------------------------------------------- 
 # Clock
 # -------------------------------------------------------------------------- 
-^ca(1, /home/infinity/.xmonad/scripts/dateshow)\
+^ca(1, ${HOME}/.xmonad/scripts/dateshow)\
 ^fg(\#393939)\
 :^fg() \
-^i(/home/infinity/.xmonad/dzen/icons/xbm8x8/clock.xbm) \
+^i(${HOME}/.xmonad/dzen/icons/xbm8x8/clock.xbm) \
 ${time %a %b %d %H:%M}^fg(\#393939) \
 ^ca()\
 # -------------------------------------------------------------------------- 
 # Keyboard layout
 # -------------------------------------------------------------------------- 
 ^fg(\#393939): ^fg()^fg(\#435d75)^fg() \
-${execi 10 ~/.xmonad/scripts/kbdlayout}^fg(\#393939) \
+${execi 10 ${HOME}/.xmonad/scripts/kbdlayout}^fg(\#393939) \
 # -------------------------------------------------------------------------- 
 #  Close focused window
 # -------------------------------------------------------------------------- 
