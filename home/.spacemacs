@@ -29,7 +29,9 @@
      ;;        shell-default-position 'bottom)
      syntax-checking
      version-control
-     ;(c-c++ :variables c-c++-enable-clang-support t)
+     (c-c++ :variables
+            c-c++-default-mode-for-headers 'c++-mode
+            c-c++-enable-clang-support t)
      ycmd
      haskell
      python
@@ -190,18 +192,19 @@ before layers configuration."
   )
 
 (defun my-c++-mode-hook ()
-  (ycmd-mode t)
-  (flycheck-mode t)
-  (company-mode t)
+  ;; (ycmd-mode t)
+  ;; (flycheck-mode t)
+  ;; (company-mode t)
   (set-cpp-style)
   (linum-mode t)
+  (diff-hl-margin-mode t)
   ;; TODO: are thse required?
-  (require 'company-ycmd)
-  (company-ycmd-setup)
-  (delete 'company-clang company-backends)
-  (delete 'company-semantic company-backends)
-  (require 'flycheck-ycmd)
-  (flycheck-ycmd-setup)
+  ;; (require 'company-ycmd)
+  ;; (company-ycmd-setup)
+  ;; (delete 'company-clang company-backends)
+  ;; (delete 'company-semantic company-backends)
+  ;; (require 'flycheck-ycmd)
+  ;; (flycheck-ycmd-setup)
 )
 
 (defun dotspacemacs/config ()
@@ -227,14 +230,14 @@ layers configuration."
   ;; Delete trailing whitespace
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-  ;; add rtags
+  ;; Add rtags
   (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/rtags")
   (require 'rtags)
 
-  ;; fix ycmd
-  (setq company-clang-prefix-guesser 'company-clang-guess-prefix)
+  ;; Fix ycmd
+  ;(setq company-clang-prefix-guesser 'company-clang-guess-prefix)
 
-  ;; fix linum format
+  ;; Fix linum format
   (load-file (file-chase-links (expand-file-name "~/.emacs.d/private/fix-linum-mode.el")))
 
   ;; move text
@@ -245,6 +248,9 @@ layers configuration."
   (setq whitespace-style '(trailing lines space-before-tab
                                     indentation space-after-tab)
         whitespace-line-column 80)
+
+  ;; Set diff-hl side
+  (setq diff-hl-side 'right)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -259,7 +265,7 @@ layers configuration."
  '(ahs-idle-interval 0.25)
  '(ahs-idle-timer 0 t)
  '(ahs-inhibit-face-list nil)
- '(diff-hl-side 'right)
+ '(diff-hl-side (quote right))
  '(flycheck-clang-language-standard "c++14")
  '(ring-bell-function (quote ignore) t))
 (custom-set-faces

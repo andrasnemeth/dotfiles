@@ -28,5 +28,6 @@ if [ "$1" = "xmonad" ]; then
     #empathy &
     #xloadimage -onroot -fullscreen -center background/stars-wallpaper-1920x1080.jpg
     variety &
+    parcellite &
     nice -n 10 gnome-terminal -e ~/bin/tmux_session.sh &
 fi
