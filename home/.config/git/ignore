@@ -1,4 +1,10 @@
+## Compiled files
 ##
+
+# Python
+*.pyc
+
+
 ## Tools
 ##
 
