@@ -8,3 +8,6 @@
 (set-display-table-slot standard-display-table
                         'vertical-border
                         (make-glyph-code ?┃))
+(set-display-table-slot buffer-display-table
+                        'vertical-border
+                        (make-glyph-code ?┃))
