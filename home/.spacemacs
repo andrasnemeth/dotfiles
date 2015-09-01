@@ -17,8 +17,12 @@
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     auto-completion
-     ;better-defaults
+     (auto-completion  :variables
+                       auto-completion-return-key-behavior 'complete
+                       auto-completion-tab-key-behavior 'cycle
+                       auto-completion-complete-with-key-sequence nil
+                       auto-completion-enable-help-tooltip t)
+     better-defaults
      emacs-lisp
      git
      github
@@ -175,6 +179,8 @@ before layers configuration."
           (list "python2" ycmd-lib))
     )
   (set-variable 'ycmd-extra-conf-whitelist '("~/workspace/*" "~/repositories/*"))
+
+  (setq org-plantuml-jar-path "~/tools/plantuml.jar")
 )
 
 (defun set-cpp-style ()
@@ -196,8 +202,10 @@ before layers configuration."
   ;; (flycheck-mode t)
   ;; (company-mode t)
   (set-cpp-style)
-  (linum-mode t)
+  ;(linum-mode t)
   (diff-hl-margin-mode t)
+  ;; Company - TODO
+  (define-key c++-mode-map "\C-tab" 'company-complete)
   ;; TODO: are thse required?
   ;; (require 'company-ycmd)
   ;; (company-ycmd-setup)
@@ -205,27 +213,37 @@ before layers configuration."
   ;; (delete 'company-semantic company-backends)
   ;; (require 'flycheck-ycmd)
   ;; (flycheck-ycmd-setup)
+  (whitespace-mode t)
 )
 
 (defun dotspacemacs/config ()
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
+
+  ;; Fixes
+
   ;; Fix keys in terminal
   (when (fboundp 'windmove-default-keybindings)
     (windmove-default-keybindings))
   (load-file (file-chase-links (expand-file-name "~/.emacs.d/private/fix-tmux-keys.el")))
+
+  ;; Fix vertical border
   (load-file (file-chase-links (expand-file-name "~/.emacs.d/private/fix-vertical-border.el")))
+
+  ;; Fix linum format
+  (load-file (file-chase-links (expand-file-name "~/.emacs.d/private/fix-linum-mode.el")))
 
   ;;Set c++ style
   (add-hook 'c++-mode-hook 'my-c++-mode-hook)
 
+  ;; Clang-format
+  (defun clang-format-bindings ()
+    (define-key c++-mode-map [tab] 'clang-format-buffer))
   ;; Bind clang-format-region to C-M-tab in all modes:
   (global-set-key [C-M-tab] 'clang-format-region)
   ;; Bind clang-format-buffer to tab on the c++-mode only:
   (add-hook 'c++-mode-hook 'clang-format-bindings)
-  (defun clang-format-bindings ()
-    (define-key c++-mode-map [tab] 'clang-format-buffer))
 
   ;; Delete trailing whitespace
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -237,11 +255,8 @@ layers configuration."
   ;; Fix ycmd
   ;(setq company-clang-prefix-guesser 'company-clang-guess-prefix)
 
-  ;; Fix linum format
-  (load-file (file-chase-links (expand-file-name "~/.emacs.d/private/fix-linum-mode.el")))
-
   ;; move text
-  (require 'move-text)
+  (move-text-default-bindings)
 
   ;; 80 character line width
   ;; TODO
@@ -249,8 +264,22 @@ layers configuration."
                                     indentation space-after-tab)
         whitespace-line-column 80)
 
+  (require 'whitespace)
+  (setq whitespace-style '(face empty tabs lines-tail trailing))
+  ;(global-whitespace-mode t)
+
   ;; Set diff-hl side
-  (setq diff-hl-side 'right)
+  ;(setq diff-hl-side 'right)
+
+  ;; Separator at 80 character width
+  ;(load-file (file-chase-links (expand-file-name "~/.emacs.d/private/highlight-fill-column-mode.el")))
+  ;(load-file (file-chase-links (expand-file-name "~/.emacs.d/private/column-maker.el")))
+
+  ;; whitespace-mode
+  ;; free of trailing whitespace and to use 80-column width, standard indentation
+  ;(setq whitespace-style '(trailing lines space-before-tab
+  ;                                  indentation space-after-tab)
+  ;            whitespace-line-column 80)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -267,6 +296,7 @@ layers configuration."
  '(ahs-inhibit-face-list nil)
  '(diff-hl-side (quote right))
  '(flycheck-clang-language-standard "c++14")
+ '(hlt-act-on-any-face-flag t)
  '(ring-bell-function (quote ignore) t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
