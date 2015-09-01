@@ -5,3 +5,5 @@
 "\e[5D": backward-word
 "\e\e[C": forward-word
 "\e\e[D": backward-word
+
+set editing-mode emacs
