@@ -268,6 +268,9 @@ layers configuration."
   (setq whitespace-style '(face empty tabs lines-tail trailing))
   ;(global-whitespace-mode t)
 
+  ;; Switch hl-line-mode off
+  (global-hl-line-mode -1)
+
   ;; Set diff-hl side
   ;(setq diff-hl-side 'right)
 
