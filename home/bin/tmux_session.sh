@@ -12,8 +12,8 @@ then
     tmux attach-session -d
 else
     powerline_conf="$(pip show powerline-status | grep 'Location: ' | cut -d ' ' -f 2)/powerline/bindings/tmux/powerline.conf"
-    tmux -2 new-session -d -n${USER} -s${USER}@${HOSTNAME}
-    tmux -2 new-window -n irssi -t 10 -d irssi
+    tmux -2 new-session -d -s${USER}@${HOSTNAME}
+    #tmux -2 new-window -n irssi -t 10 -d irssi
     tmux -2 source $powerline_conf
     tmux -2 attach -t ${USER}
 fi

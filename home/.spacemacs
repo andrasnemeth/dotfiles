@@ -49,8 +49,9 @@
    ;; configuration in `dotspacemacs/config'.
    dotspacemacs-additional-packages '()
    ;; A list of packages and/or extensions that will not be install and loaded.
-   dotspacemacs-excluded-packages '(smartparens)
-   ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
+   ;;dotspacemacs-excluded-packages '(smartparens)
+   dotspacemacs-excluded-packages '()
+  ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
    ;; are declared in a layer which is not a member of
    ;; the list `dotspacemacs-configuration-layers'
    dotspacemacs-delete-orphan-packages t))
@@ -195,6 +196,7 @@ before layers configuration."
   (c-set-offset 'arglist-intro '++)
   (c-set-offset 'arglist-cont-nonempty '++)
   (c-set-offset 'template-args-cont '++)
+  (c-set-offset 'statement-cont '++)
   )
 
 (defun my-c++-mode-hook ()
@@ -214,7 +216,7 @@ before layers configuration."
   ;; (require 'flycheck-ycmd)
   ;; (flycheck-ycmd-setup)
   (whitespace-mode t)
-)
+  )
 
 (defun dotspacemacs/config ()
   "Configuration function.
@@ -222,6 +224,9 @@ before layers configuration."
 layers configuration."
 
   ;; Fixes
+
+  ;; Fix flycheck error display function
+  (setq flycheck-display-errors-function 'flycheck-display-error-messages-unless-error-list)
 
   ;; Fix keys in terminal
   (when (fboundp 'windmove-default-keybindings)
@@ -273,6 +278,15 @@ layers configuration."
 
   ;; Set diff-hl side
   ;(setq diff-hl-side 'right)
+
+  ;; Disable smartparens mode globally
+  (smartparens-global-mode nil)
+  (smartparens-mode nil)
+
+  (load-file (file-chase-links (expand-file-name "~/.emacs.d/private/compiler-window.el")))
+  (add-hook 'compilation-mode-hook 'my-compilation-hook)
+  (global-set-key [f9] 'my-compile)
+
 
   ;; Separator at 80 character width
   ;(load-file (file-chase-links (expand-file-name "~/.emacs.d/private/highlight-fill-column-mode.el")))

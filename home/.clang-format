@@ -4,6 +4,9 @@ ConstructorInitializerIndentWidth: 8
 AlignEscapedNewlinesLeft: false
 # comments after statements in the same column (in consecutive lines)
 AlignTrailingComments: false
+# Indentation after line break
+AlignAfterOpenBracket: true
+ContinuationIndentWidth: 8
 # ?
 AllowAllParametersOfDeclarationOnNextLine: true
 AllowShortBlocksOnASingleLine: false
@@ -18,11 +21,13 @@ BreakBeforeBinaryOperators: false
 BreakConstructorInitializersBeforeComma: false
 # ? (false: params on same line or one line each)
 BinPackParameters: true
+BinPackArguments: true
 ColumnLimit:     80
 # ?
-ConstructorInitializerAllOnOneLineOrOnePerLine: false
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
 DerivePointerBinding: false
-ExperimentalAutoDetectBinPacking: false
+DerivePointerAlignment: true
+ExperimentalAutoDetectBinPacking: true
 IndentCaseLabels: false
 MaxEmptyLinesToKeep: 1
 NamespaceIndentation: None
@@ -36,7 +41,7 @@ PenaltyReturnTypeOnItsOwnLine: 200
 PointerBindsToType: true
 SpacesBeforeTrailingComments: 1
 Cpp11BracedListStyle: true
-Standard:        Cpp03
+Standard:        Cpp11
 IndentWidth:     4
 TabWidth:        4
 UseTab:          Never
@@ -48,4 +53,10 @@ SpaceInEmptyParentheses: false
 SpacesInCStyleCastParentheses: false
 SpaceAfterControlStatementKeyword: true
 SpaceBeforeAssignmentOperators: true
-ContinuationIndentWidth: 8
+SpaceBeforeParens: ControlStatements
+SpacesBeforeTrailingComments: 1
+SpacesInSquareBrackets: false
+# macros
+AlignEscapedNewlinesLeft: true
+# empty lines
+MaxEmptyLinesToKeep: 1
