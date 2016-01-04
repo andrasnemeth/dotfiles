@@ -5,10 +5,10 @@ AlignEscapedNewlinesLeft: false
 # comments after statements in the same column (in consecutive lines)
 AlignTrailingComments: false
 # Indentation after line break
-AlignAfterOpenBracket: true
+AlignAfterOpenBracket: false
 ContinuationIndentWidth: 8
 # ?
-AllowAllParametersOfDeclarationOnNextLine: true
+AllowAllParametersOfDeclarationOnNextLine: false
 AllowShortBlocksOnASingleLine: false
 AllowShortFunctionsOnASingleLine: None
 AllowShortIfStatementsOnASingleLine: false
