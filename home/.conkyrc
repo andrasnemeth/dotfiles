@@ -13,8 +13,8 @@ TEXT
 ^fg(\#393939)\
 ^fg()\
 ^i(${HOME}/.xmonad/dzen/icons/xbm8x8/net_down_03.xbm)\
- ${downspeedf enp0s3} \
-^i(${HOME}/.xmonad/dzen/icons/xbm8x8/net_up_03.xbm) ${upspeedf enp0s3}\
+ ${downspeedf wlo1} \
+^i(${HOME}/.xmonad/dzen/icons/xbm8x8/net_up_03.xbm) ${upspeedf wlo1}\
 ^fg(\#393939) \
 # -------------------------------------------------------------------------- 
 # Cpu Usage

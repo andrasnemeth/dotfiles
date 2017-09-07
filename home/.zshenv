@@ -1,1 +1,0 @@
-source ~/.zprezto/runcoms/zshenv

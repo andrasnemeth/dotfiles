@@ -2,6 +2,7 @@
 
 #PATH=${PATH}:${HOME}/.cabal/bin:${HOME}/bin:${HOME}/.local/bin
 
+vmware-user-suid-wrapper
 #VBoxClient-all &
 #modprobe vmhgfs >/dev/null 2>&1 && vmware-user-suid-wrapper
 
@@ -19,7 +20,7 @@ xset fp rehash
 #xset fp rehash
 
 if [ "$1" = "xmonad" ]; then
-    VBoxClient-all &
+    #VBoxClient-all &
     setxkbmap -layout en_US,hu -option grp:caps_toggle
     xset b off &
     xrdb -merge ~/.Xdefaults
@@ -29,5 +30,6 @@ if [ "$1" = "xmonad" ]; then
     #xloadimage -onroot -fullscreen -center background/stars-wallpaper-1920x1080.jpg
     variety &
     parcellite &
-    nice -n 10 gnome-terminal -e ~/bin/tmux_session.sh &
+    dbus-launch nice -n 10 gnome-terminal -e ~/bin/tmux_session.sh &
+    rdm --daemon --log-file /tmp/rdm.log
 fi

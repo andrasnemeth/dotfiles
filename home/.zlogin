@@ -1,1 +1,1 @@
-source ~/.zprezto/runcoms/zlogin
+source /home/nrw/.zim/templates/zlogin

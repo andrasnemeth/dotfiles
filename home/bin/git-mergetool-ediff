@@ -8,7 +8,8 @@ if [ ! ${#} -ge 3 ]; then
 fi
 
 # tools
-_EMACSCLIENT=/usr/local/bin/emacsclient
+#_EMACSCLIENT=/usr/local/bin/emacsclient
+_EMACSCLIENT=emacs
 _BASENAME=/bin/basename
 _CP=/bin/cp
 _EGREP=/bin/egrep
@@ -28,15 +29,17 @@ else
 fi
 
 # console vs. X
-if [ "${TERM}" = "linux" ]; then
-    unset DISPLAY
-    _EMACSCLIENTOPTS="-t"
-else
-    _EMACSCLIENTOPTS="-c"
-fi
+# if [ "${TERM}" = "linux" ]; then
+#     unset DISPLAY
+#     _EMACSCLIENTOPTS="-t"
+# else
+#     _EMACSCLIENTOPTS="-c"
+# fi
+_EMACSCLIENTOPTS=
 
 # run emacsclient
-${_EMACSCLIENT} ${_EMACSCLIENTOPTS} -a "" -e "(${_EVAL})" 2>&1
+#${_EMACSCLIENT} ${_EMACSCLIENTOPTS} -a "" -e "(${_EVAL})" 2>&1
+emacs -e "(${_EVAL})" 2>&1
 
 # check modified file
 if [ ! $(egrep -c '^(<<<<<<<|=======|>>>>>>>|####### Ancestor)' ${_MERGED}) = 0 ]; then

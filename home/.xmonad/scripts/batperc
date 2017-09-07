@@ -9,7 +9,7 @@
 
 #BAT=`acpi -b | awk '{gsub(/%,/,""); print $4}'`
 #STATUS=`acpi -b | awk '{gsub(/,/,""); print $3}'`
-BAT=$(acpi -b | cut -d " " -f 4 | sed 's/%//')
+BAT=$(acpi -b | cut -d " " -f 4 | sed 's/%,//')
 STATUS=$(acpi -b | cut -d " " -f 3 | sed 's/,//')
 
 if [[ $BAT -lt 10 ]]; then
