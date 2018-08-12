@@ -17,4 +17,3 @@ else
     tmux -2 source $powerline_conf
     tmux -2 attach -t ${USER}
 fi
-

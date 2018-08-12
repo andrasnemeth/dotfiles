@@ -1,13 +1,10 @@
-`git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"`
-`setopt EXTENDED_GLOB                                                           \
-for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do           \
-ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"                                \
-done`
-`mkdir -p ~/.local/share/fonts`
-`git clone https://github.com/powerline/fonts.git  ~/.local/share/fonts/powerline-fonts`
-`fc-cache -fv`
+`git clone --recursive  https://github.com/Eriner/zim.git "${$HOME}/.zim"`
+`setopt EXTENDED_GLOB`
 `git clone --recursive https://github.com/syl20bnr/spacemacs ~/.emacs.d`
 `git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf`
 `~/.fzf/install`
-pip install --user powerline-status
-pip show powerline-status | grep 'Location: ' | cut -d ' ' -f 2
+`pacman -S powerline powerline-fonts`
+`fc-cache -fv`
+`ln -s "$(pip show powerline-status | grep "Location:" | cut -d ' ' -f 2)/powerline/dist/systemd/powerline-daemon.service" "${HOME}/.config/systemd/user/"`
+`systemctl enable powerline-daemon`
+`systemctl start powerline-daemon`

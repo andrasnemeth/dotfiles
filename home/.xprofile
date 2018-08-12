@@ -3,6 +3,7 @@
 #PATH=${PATH}:${HOME}/.cabal/bin:${HOME}/bin:${HOME}/.local/bin
 
 vmware-user-suid-wrapper
+light-locker &
 #VBoxClient-all &
 #modprobe vmhgfs >/dev/null 2>&1 && vmware-user-suid-wrapper
 
