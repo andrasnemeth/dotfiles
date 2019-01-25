@@ -1,5 +1,4 @@
 `git clone --recursive  https://github.com/Eriner/zim.git "${$HOME}/.zim"`
-`setopt EXTENDED_GLOB`
 `git clone --recursive https://github.com/syl20bnr/spacemacs ~/.emacs.d`
 `git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf`
 `~/.fzf/install`

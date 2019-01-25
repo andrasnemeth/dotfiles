@@ -1,4 +1,4 @@
-source /home/nrw/.zim/templates/zshrc
+source ~/.zim/templates/zshrc
 
 ##
 ## alias

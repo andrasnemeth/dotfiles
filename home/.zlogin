@@ -1,1 +1,1 @@
-source /home/nrw/.zim/templates/zlogin
+source ~/.zim/templates/zlogin

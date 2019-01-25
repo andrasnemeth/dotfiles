@@ -1,7 +1,7 @@
-source /home/nrw/.zim/templates/zimrc
+source ~/.zim/templates/zimrc
 
 zprompt_theme='pure'
 
-zmodules=(directory environment fasd git git-info history input utility meta \
+zmodules=(directory environment fasd git git-info history input utility \
           custom syntax-highlighting history-substring-search prompt completion \
-          spectrum archive ssh utility pacman)
+          archive ssh utility pacman)
