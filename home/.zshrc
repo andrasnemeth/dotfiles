@@ -1,5 +1,7 @@
 source ~/.zim/templates/zshrc
 
+source /home/nrw/.zprofile
+
 ##
 ## alias
 alias wpa="sudo wpa_supplicant -B -i enp0s25 -c /etc/wpa_supplicant/wpa_supplicant.conf"
