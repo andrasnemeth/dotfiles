@@ -1,9 +1,28 @@
-`git clone --recursive  https://github.com/Eriner/zim.git "${$HOME}/.zim"`
+require 'shellwords'
+
+`mkdir -p "${HOME}/.zim"`
+`git clone --recursive  https://github.com/Eriner/zim.git "${HOME}/.zim"`
+command = "" \
+"for template_file in ${ZDOTDIR:-${HOME}}/.zim/templates/*; do " \
+  "user_file=${ZDOTDIR:-${HOME}}/.${template_file:t}; " \
+  "cat ${template_file} ${user_file}(.N) > ${user_file}.tmp && mv ${user_file}{.tmp,}; " \
+"done"
+escaped_command = Shellwords.escape(command)
+system "/bin/zsh -c #{escaped_command}"
 `git clone --recursive https://github.com/syl20bnr/spacemacs ~/.emacs.d`
+`cd ${HOME}/.emacs.d && git checkout develop`
 `git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf`
-`~/.fzf/install`
-`pacman -S powerline powerline-fonts`
+`~/.fzf/install --all`
+puts ">>> Going to install operating system packages, this will require sudo"
+puts ">>> Hit [ENTER] to cotinue or [Ctrl+C] to quit"
+STDIN.gets
+`sudo pacman -Sy`
+`sudo pacman -S --noconfirm --needed powerline powerline-fonts python python-pip tmux emacs-nox`
 `fc-cache -fv`
-`ln -s "$(pip show powerline-status | grep "Location:" | cut -d ' ' -f 2)/powerline/dist/systemd/powerline-daemon.service" "${HOME}/.config/systemd/user/"`
-`systemctl enable powerline-daemon`
-`systemctl start powerline-daemon`
+`mkdir -p "${HOME}/.config/systemd/user"`
+command = "ln -s $(pip show powerline-status | grep 'Location:' | cut -d ' ' -f 2)/powerline/dist/systemd/powerline-daemon.service ${HOME}/.config/systemd/user/"
+escaped_command = Shellwords.escape(command)
+system "/bin/zsh -c #{escaped_command}"
+`systemctl enable --user powerline-daemon`
+`systemctl start --user powerline-daemon`
+

@@ -1,6 +1,6 @@
 source ~/.zim/templates/zshrc
 
-source /home/nrw/.zprofile
+source ${HOME}/.zprofile
 
 ##
 ## alias
@@ -91,3 +91,7 @@ setopt transient_rprompt # only show the rprompt on the current prompt
 
 # ===== Scripts and Functions
 setopt multios # perform implicit tees or cats when multiple redirections are attempted
+
+if [ -f ~/.zshrcadditions ]; then
+  source ~/.zshrcadditions
+fi

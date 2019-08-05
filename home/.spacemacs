@@ -49,6 +49,7 @@ values."
                        auto-completion-complete-with-key-sequence-delay 0.1
                        auto-completion-enable-help-tooltip t)
      better-defaults
+     dap
      emacs-lisp
      git
      github
@@ -61,8 +62,9 @@ values."
      version-control
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode
-            c-c++-enable-clang-support t)
-     c++-rtags
+            ;c-c++-enable-clang-support t
+            c-c++-backend 'lsp-ccls)
+     ;c++-rtags
      ;ycmd
      haskell
      (python :variables python-enable-yapf-format-on-save t)
