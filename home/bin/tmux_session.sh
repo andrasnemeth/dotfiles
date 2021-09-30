@@ -2,6 +2,11 @@
 
 PATH=${PATH}:~/.local/bin
 
+if [ -z "${HOSTNAME}" ]; then
+    HOSTNAME=$(hostname)
+fi
+HOSTNAME="local"
+
 export TERM=xterm-256color
 #export POWERLINE_CONFIG_COMMAND=$(which powerline-config)
 

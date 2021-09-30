@@ -30,7 +30,7 @@ values."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(rust
      javascript
      graphviz
      ruby
@@ -47,14 +47,15 @@ values."
                        auto-completion-tab-key-behavior 'cycle
                        auto-completion-complete-with-key-sequence nil
                        auto-completion-complete-with-key-sequence-delay 0.1
-                       auto-completion-enable-help-tooltip t)
+                       auto-completion-enable-help-tooltip t
+                       auto-completion-enable-snippets-in-popup t)
      better-defaults
      dap
      emacs-lisp
      git
      github
      markdown
-     org
+     ;org
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
@@ -63,11 +64,17 @@ values."
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode
             ;c-c++-enable-clang-support t
-            c-c++-backend 'lsp-ccls)
+            c-c++-adopt-subprojects t
+            c-c++-backend 'lsp-ccls
+            c-c++-lsp-sem-highlight-method 'overlay
+            c-c++-lsp-sem-highlight-rainbow nil)
      ;c++-rtags
      ;ycmd
      haskell
-     (python :variables python-enable-yapf-format-on-save t)
+     (python :variables
+             python-formatter 'yapf
+             python-enable-yapf-format-on-save t
+             python-test-runner 'pytest)
      django
      erlang
      html
@@ -75,6 +82,11 @@ values."
      restructuredtext
      docker
      themes-megapack
+     rust
+     (go :variables
+         go-tab-width 4
+         go-format-before-save t)
+     ;(lsp :variables lsp-lens-enable t)
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -283,8 +295,9 @@ values."
    ;; when it reaches the top or bottom of the screen. (default t)
    dotspacemacs-smooth-scrolling t
    ;; Control line numbers activation.
-   ;; If set to `t' or `relative' line numbers are turned on in all `prog-mode' and
-   ;; `text-mode' derivatives. If set to `relative', line numbers are relative.
+   ;; If set to `t' or `relative' line numbers are turned on in all `prog-mode'
+   ;; and ;; `text-mode' derivatives. If set to `relative', line numbers are
+   ;; relative.
    ;; This variable can also be set to a property list for finer control:
    ;; '(:relative nil
    ;;   :disabled-for-modes dired-mode
@@ -394,21 +407,30 @@ you should place your code here."
   (setq powerline-default-separator 'arrow)
 
   ;; Fix flycheck error display function
-  (setq flycheck-display-errors-function 'flycheck-display-error-messages-unless-error-list)
+  (setq flycheck-display-errors-function
+        'flycheck-display-error-messages-unless-error-list)
 
   ;; Fix keys in terminal
   (when (fboundp 'windmove-default-keybindings)
     (windmove-default-keybindings))
-  (load-file (file-chase-links (expand-file-name "~/.emacs.d/private/fix-tmux-keys.el")))
+  (load-file (file-chase-links
+              (expand-file-name "~/.emacs.d/private/fix-tmux-keys.el")))
 
   ;; Fix vertical border
-  (load-file (file-chase-links (expand-file-name "~/.emacs.d/private/fix-vertical-border.el")))
+  (load-file (file-chase-links
+              (expand-file-name "~/.emacs.d/private/fix-vertical-border.el")))
 
   ;; Fix linum format
-  (load-file (file-chase-links (expand-file-name "~/.emacs.d/private/fix-linum-mode.el")))
+  ;(load-file (file-chase-links
+  ;            (expand-file-name "~/.emacs.d/private/fix-linum-mode.el")))
 
   ;; Fix reusable frames
-  ;(load-file (file-chase-links (expand-file-name "~/.emacs.d/private/reuse-windows.el")))
+  ;(load-file (file-chase-links (expand-file-name
+  ;            "~/.emacs.d/private/reuse-windows.el")))
+
+  ;; Enable linum mode
+  (global-display-line-numbers-mode)
+  (global-linum-mode t)
 
   ;;Set c++ style
   (add-hook 'c++-mode-hook 'my-c++-mode-hook)
@@ -442,7 +464,7 @@ you should place your code here."
   ;; Additions
 
   ;; move text
-  (move-text-default-bindings)
+  ;(move-text-default-bindings)
 
   ;; 80 character line width
   ;; TODO
@@ -467,7 +489,8 @@ you should place your code here."
   (smartparens-global-mode nil)
   (smartparens-mode nil)
 
-  ;(load-file (file-chase-links (expand-file-name "~/.emacs.d/private/compiler-window.el")))
+  ;(load-file (file-chase-links
+  ;            (expand-file-name "~/.emacs.d/private/compiler-window.el")))
   ;(add-hook 'compilation-mode-hook 'my-compilation-hook)
   ;i(global-set-key [f9] 'my-compile)
   (global-set-key [f9] 'compile)

@@ -95,3 +95,5 @@ setopt multios # perform implicit tees or cats when multiple redirections are at
 if [ -f ~/.zshrcadditions ]; then
   source ~/.zshrcadditions
 fi
+
+alias usebash="USE_BASH=1 /usr/bin/env bash"
